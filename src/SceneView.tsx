@@ -106,7 +106,6 @@ export default class SceneView<T extends Route> extends React.Component<
     const { loading } = this.state;
 
     const focused = navigationState.index === index;
-
     return (
       <View
         accessibilityElementsHidden={!focused}
@@ -121,13 +120,14 @@ export default class SceneView<T extends Route> extends React.Component<
             ? StyleSheet.absoluteFill
             : null,
           style,
+          { position: undefined },
         ]}
       >
         {
           // Only render the route only if it's either focused or layout is available
           // When layout is not available, we must not render unfocused routes
           // so that the focused route can fill the screen
-          focused || layout.width ? this.props.children({ loading }) : null
+          focused ? this.props.children({ loading }) : null
         }
       </View>
     );
